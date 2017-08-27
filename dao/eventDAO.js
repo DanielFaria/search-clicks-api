@@ -3,8 +3,21 @@ function  eventDAO(connection) {
     this._connection = connection;
 }
 
-eventDAO.prototype.getEventos = function(params){
-     console.log(params);
+eventDAO.prototype.getEvents = function(nameEvent){
+     console.log(nameEvent);
+     return elasticClient.suggest({
+       index: 'catalogo',
+       type: "eventos",
+       body: {
+           docsuggest: {
+               text: nameEvent,
+               completion: {
+                   field: "event",
+                   fuzzy: true
+               }
+           }
+       }
+   });
 }
 
 eventDAO.prototype.addEvent = function(event){
