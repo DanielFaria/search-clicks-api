@@ -8,7 +8,15 @@ eventDAO.prototype.getEventos = function(params){
 }
 
 eventDAO.prototype.addEvent = function(event){
-     console.log(event);
+  return this._connection.index({
+    index: 'catalogo',
+    type: "eventos",
+    body: {
+        event: event.event,
+        timestamp: event.timestamp,
+        site:      event.site
+       }
+   });
 }
 
 

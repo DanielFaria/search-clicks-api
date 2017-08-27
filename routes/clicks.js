@@ -8,6 +8,11 @@ module.exports = function(app)  {
     app.get(version,function(req,res,next ){
         console.log(req.headers);
         var connection = app.dao.connectionFactory.getConnection();
+        connection.cluster.health({},function(err,resp,status) {
+             console.log("-- Client Health --",resp);
+        });
+
+
         var eventDAO = new  app.dao.eventDAO(connection);
         console.log(connection);
         res.send("Connection with  Elastic Search is alive")
@@ -15,7 +20,9 @@ module.exports = function(app)  {
     });
 
     app.post(version+'clicks/',function(req,res,next ){
-        console.log(req.headers);
-        res.send("Via post");
+        var connection = app.dao.connectionFactory.getConnection();
+        var eventDAO = new  app.dao.eventDAO(connection);
+        event = req.body;
+        eventDAO.addEvent(event).then(function (result) { res.json(result) });
     });
 }
