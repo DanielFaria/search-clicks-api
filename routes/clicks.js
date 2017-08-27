@@ -6,10 +6,13 @@ Vários plugins que utilizamos na aplicação junto do express fazem uso dos mid
 module.exports = function(app)  {
     var version = '/v1/'
     app.get(version,function(req,res,next ){
-        res.send("Olá! A api esá no ar");  
+        console.log(req.headers); 
+        res.send("Olá! A api esá no ar"); 
+
     });  
 
     app.post(version+'clicks/',function(req,res,next ){
+        console.log(req.headers); 
         res.send("Via post");  
     });  
 }
