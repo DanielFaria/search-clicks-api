@@ -1,0 +1,77 @@
+{
+    "mappings": {
+        "events" : {
+            "properties": {
+              "event": {
+                "type": "completion",
+                "analyzer": "simple",
+                "search_analyzer": "simple"
+              },
+              "site": {
+                "type": "string",
+                "analyzer": "simple",
+                "search_analyzer": "simple"
+              },
+              "date": {
+                "type": "date"
+              },
+              "ip_user": {
+                "type": "ip"
+              }
+            }
+        }
+    }
+}
+
+
+post /catalogo/events/_search?pretty
+{
+  "suggest": {
+    "song-suggest": {
+      "prefix": "c",
+      "completion": {
+        "field": "event"
+      }
+    }
+  }
+}
+
+post /catalogo/events
+
+{
+"event": "buy",
+"timestamp": "2016­09­22T13:57:31.2311892­04:00",
+"site":  "www.comprafacil.com",
+ "ip_user" :   "209.244.0.4"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "bd" : {
+    "mappings": {
+
+        "
+      }
+    }
+}

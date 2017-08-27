@@ -5,25 +5,24 @@ function  eventDAO(connection) {
 
 eventDAO.prototype.getEvents = function(nameEvent){
      console.log(nameEvent);
-     return elasticClient.suggest({
-       index: 'catalogo',
-       type: "eventos",
-       body: {
-           docsuggest: {
-               text: nameEvent,
-               completion: {
-                   field: "event",
-                   fuzzy: true
-               }
-           }
-       }
-   });
+     return this._connection.suggest({
+        index: 'catalogo',
+        body: {
+            docsuggest: {
+                text: nameEvent,
+                completion: {
+                    field: "event",
+                    fuzzy: true
+                }
+            }
+        }
+    });
 }
 
 eventDAO.prototype.addEvent = function(event){
   return this._connection.index({
     index: 'catalogo',
-    type: "eventos",
+    type: "events",
     body: {
         event: event.event,
         timestamp: event.timestamp,
