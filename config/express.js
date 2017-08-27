@@ -19,18 +19,19 @@ module.exports  =  function(){
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     app.use(expressValidator());
-    
+
    // app.use('/v1/', require('/routes/clicks'));
-   
-    
+
+
 
 	//app.set('view engine', 'ejs');
 	//Isso não pe require
 	//app.set('views', './app/views');
 
 	load('routes')
+  .then('dao')
 	.into(app);
-    
+
     /*
     app.use(function(req, res, next) {
        res.status(404).render('erros/404');

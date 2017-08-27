@@ -6,13 +6,16 @@ Vários plugins que utilizamos na aplicação junto do express fazem uso dos mid
 module.exports = function(app)  {
     var version = '/v1/'
     app.get(version,function(req,res,next ){
-        console.log(req.headers); 
-        res.send("Olá! A api esá no ar"); 
+        console.log(req.headers);
+        var connection = app.dao.connectionFactory.getConnection();
+        var eventDAO = new  app.dao.eventDAO(connection);
+        console.log(connection);
+        res.send("Connection with  Elastic Search is alive")
 
-    });  
+    });
 
     app.post(version+'clicks/',function(req,res,next ){
-        console.log(req.headers); 
-        res.send("Via post");  
-    });  
+        console.log(req.headers);
+        res.send("Via post");
+    });
 }
